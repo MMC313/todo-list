@@ -12,6 +12,7 @@ import Plus from './icons/plus.png'
 
 const sidebar = document.getElementById("sidebar");
 
+
 function newDiv(content,classList,id){
     const newDiv = document.createElement("div");
     newDiv.textContent = content
@@ -107,20 +108,4 @@ const newTask = (() => {
     taskbar.appendChild(newBtn("Add task","taskAdd"))
     const taskAdd = document.querySelector(".taskAdd")
     taskAdd.appendChild(plusIcon)
-})();
-
-
-const taskForm = (() =>{
-    const content = document.getElementById("content");
-    content.appendChild(newDiv("","","taskForm"));
-    const taskForm = document.getElementById("taskForm");
-    taskForm.appendChild(newDiv("","taskInfo1"))
-    taskForm.appendChild(newDiv("","taskInfo2"))
-    const taskInfo1 = document.querySelector(".taskInfo1")
-    const taskInfo2 = document.querySelector(".taskInfo2")
-
-    taskInfo1.innerHTML = '<input type="text" id="title" placeholder="Task Info"></input>'
-    taskInfo1.innerHTML += '<input type="text" id="dueDate" placeholder="Schedule">'
-    taskInfo1.innerHTML += '<select id="project-select"><option value="Inbox">Inbox</option></select>'
-    taskInfo2.innerHTML = '<select id="priority-select"><option value="none">Select Priority</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select>'
 })();

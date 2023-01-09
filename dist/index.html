@@ -14,7 +14,29 @@
         <div id="sidebar">
             <div class="sidebarBlur"></div>
         </div>
-        <div id="taskbar"></div>
+        <div id="taskbar">
+            <div id="taskForm">
+                <form action="">
+                    <div>
+                        <input type="text" id="title" placeholder="Title">
+                        <input type="text" id="date" placeholder="Due Date" onfocus="(this.type='date')">
+                        <select name="priority" id="priority">
+                            <option value="" disabled selected>Select Priority</option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div>
+                        <textarea id="description" name="description" rows="4" cols="55" placeholder="Description"></textarea>
+                    </div>
+                    <div>
+                        <button id="submitBtn">Submit</button>                        
+                        <button id="cancelBtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     
 </body>
