@@ -8,34 +8,11 @@ import Completed from './icons/completed.png'
 import Projects from './icons/projects.png'
 import Add from './icons/add.png'
 import Plus from './icons/plus.png'
-
+import {newDiv,newBtn} from './functions.js'
 
 const sidebar = document.getElementById("sidebar");
 
 
-function newDiv(content,classList,id){
-    const newDiv = document.createElement("div");
-    newDiv.textContent = content
-    if(classList !== ""){
-    newDiv.classList.add(classList)
-    }
-    if(id !== undefined){
-        newDiv.id = id;
-    }
-    return newDiv;
-}
-
-function newBtn(content,classList,id){
-    const newBtn = document.createElement("button");
-    newBtn.textContent = content
-    if(classList !== ""){
-    newBtn.classList.add(classList)
-    }
-    if(id !== undefined){
-        newBtn.id = id;
-    }
-    return newBtn;
-}
 
 
 (function header(){
