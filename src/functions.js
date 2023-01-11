@@ -1,12 +1,12 @@
 
 export  function newDiv(content,classList,id){
             const newDiv = document.createElement("div");
-            newDiv.value = content
+            newDiv.textContent = content;
             if(classList !== ""){
                 newDiv.classList.add(classList)
             }
             if(id !== undefined){
-                newDiv.id = id;
+                newDiv.id = id; 
             }
             return newDiv;
         }

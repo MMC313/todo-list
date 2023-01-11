@@ -10,6 +10,7 @@ import Add from './icons/add.png'
 import Plus from './icons/plus.png'
 import {newDiv,newBtn} from './functions.js'
 
+
 const sidebar = document.getElementById("sidebar");
 
 
@@ -85,4 +86,10 @@ const newTask = (() => {
     taskbar.appendChild(newBtn("Add task","taskAdd"))
     const taskAdd = document.querySelector(".taskAdd")
     taskAdd.appendChild(plusIcon)
+    taskbar.appendChild(newDiv("","","taskCards"))
+})();
+
+
+const taskCard=(()=>{
+    
 })();
