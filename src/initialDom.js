@@ -11,8 +11,6 @@ import Plus from './icons/plus.png'
 import {newDiv,newBtn} from './functions.js'
 
 
-const sidebar = document.getElementById("sidebar");
-
 
 
 
@@ -47,6 +45,7 @@ const sidebar = document.getElementById("sidebar");
 
 
 (function projDates(){
+    const sidebar = document.getElementById("sidebar");
     
     sidebar.appendChild(newDiv("","dateNav"))
     const dateNav = document.querySelector(".dateNav");
@@ -90,6 +89,85 @@ const newTask = (() => {
 })();
 
 
-const taskCard=(()=>{
+function taskFactory(title,date,priority,proj,desc,comp){
+    title = title.value;
+    if(date.value == ""){ date = "No due date"}else{date = date.value;}
+    if(priority.value == ""){ priority = "No priority"}else{priority = priority.value;}
+    if(proj.value == ""){ proj = "All"}else{proj = proj.value;}
+    if(desc.value == ""){ desc = "No description"}else{desc = desc.value;}
+    comp = "";
+    return { title , date, priority, proj, desc,comp}
+};
+
+
+
+
+
+let taskArray = [];
+
+export function createTask(){
+    const title = document.getElementById("title");
+    const date = document.getElementById("date");
+    const priority = document.getElementById("priority");
+    const proj = document.getElementById("project");
+    const desc = document.getElementById("description");
+    const comp = "";
+    const task = taskFactory(title,date,priority,proj,desc,comp);
+    taskArray.push(task);
+}
+
+export function addTaskCard(){
+
     
-})();
+  
+    const taskCards = document.getElementById("taskCards");
+
+    taskCards.innerHTML = "";
+    for(let i=0;i<taskArray.length;i++){
+        taskCards.appendChild(newDiv("","taskCard",i));
+        let card = document.getElementById(i);
+        let taskColor = (taskArray[i].comp == "completed") ? card.style.backgroundColor = '#78716c':
+                        (taskArray[i].priority == "low") ? card.style.backgroundColor = '#22c55e' : 
+                        (taskArray[i].priority == "medium") ? card.style.backgroundColor = '#f59e0b' : 
+                        (taskArray[i].priority == "high") ? card.style.backgroundColor = '#ef4444':
+                        (taskArray[i].priority == "No priority") ? card.style.backgroundColor = '#e5e7eb':
+                        card.style.backgroundColor = '#78716c';
+                        
+
+        card.appendChild(newDiv("","taskTop",`taskTop-${i}`))
+        const taskTop = document.getElementById(`taskTop-${i}`)
+        taskTop.appendChild(newDiv(`Project: ${taskArray[i].proj}`,"taskProject"))
+        taskTop.appendChild(newDiv(taskArray[i].title,"taskTitle"))
+        taskTop.appendChild(newDiv(taskArray[i].date,"taskDate"))
+        card.appendChild(newDiv("","taskBottom",`taskBottom-${i}`))
+
+
+    
+        const taskBottom = document.getElementById(`taskBottom-${i}`);
+        taskBottom.appendChild(newDiv(`-${taskArray[i].desc}`,"description"))
+        taskBottom.appendChild(newDiv("","taskCheckRemove",`taskCheckRemove-${i}`));
+        const taskBtns = document.getElementById(`taskCheckRemove-${i}`)
+        const checkBtn = document.createElement("button")
+        const rmBtn = document.createElement("button")
+        checkBtn.textContent = ""
+        checkBtn.classList = "check"
+        checkBtn.addEventListener("click",()=>{
+            if(taskArray[i].comp == "completed"){
+                taskArray[i].comp = ""
+            }else{
+                taskArray[i].comp = "completed"
+            }
+            
+            addTaskCard();
+        })
+        taskBtns.appendChild(checkBtn)
+        
+        rmBtn.textContent = ""
+        rmBtn.classList = "remove"
+        rmBtn.addEventListener("click",()=>{
+            taskArray.splice(i,1);
+            addTaskCard();
+        })
+        taskBtns.appendChild(rmBtn)
+    }
+}
