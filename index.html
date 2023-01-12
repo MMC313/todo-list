@@ -15,9 +15,9 @@
         </div>
         <div id="taskbar">
             <div id="taskForm">
-                <form action="">
+                <form action="" id="taskFormInfo">
                     <div style="display: flex; justify-content: space-between;">
-                        <input type="text" id="title" placeholder="Title">
+                        <input type="text" id="title" placeholder="Title" required>
                         <input type="text" id="date" placeholder="Due Date" onfocus="(this.type='date')">
                         <select name="priority" id="priority">
                             <option value="" disabled selected>Select Priority</option>
@@ -27,7 +27,6 @@
                         </select>
                         <select name="project" id="project">
                             <option value="" disabled selected>Project</option>
-                            <option value="all">All</option>
                         </select>
                     </div>
                     <div>
