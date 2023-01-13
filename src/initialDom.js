@@ -64,6 +64,8 @@ import {newDiv,newBtn} from './functions.js'
 
 
 (function newProjects(){
+    const projectFormOpt =  document.getElementById("project")
+    
     sidebar.appendChild(newDiv("","projects"));
     const projects = document.querySelector(".projects");
     const projIcon = new Image();
@@ -76,6 +78,54 @@ import {newDiv,newBtn} from './functions.js'
     projects.appendChild(newBtn("Create new project","addProject"))
     const addProj = document.querySelector(".addProject")
     addProj.appendChild(addIcon)
+    const projForm = document.querySelector(".projectForm")
+    addProj.addEventListener("click",()=>{
+        projForm.style.visibility = "visible"
+        addProj.style.visibility = "hidden"
+    })
+    const projInput = document.getElementById("projName")
+    const projFormAdd = document.getElementById("projAdd")
+    const projFormCancel = document.getElementById("projCancel")
+    projFormCancel.addEventListener("click",function cancel(event){
+        event.preventDefault();
+        projForm.style.visibility = "hidden"
+        addProj.style.visibility = "visible"
+        projInput.value = "";
+    })
+    projects.appendChild(newDiv("","projContainer"))
+    let projList =[];
+    projFormAdd.addEventListener("click",function add(event){
+        event.preventDefault();
+        
+        console.log(projList)
+        if(projList.includes(projInput.value)){
+            alert("fuck you")
+        }else{
+            const newOpt = document.createElement("option")
+            newOpt.textContent = projInput.value
+            newOpt.setAttribute("value",projInput.value)
+            projectFormOpt.appendChild(newOpt);
+            const projCont = document.querySelector(".projContainer")
+            projCont.appendChild(newDiv(projInput.value,"projectSelect",projInput.value,))
+            projList.push(projInput.value)
+            const projSelectTitle = document.getElementById(projInput.value);
+            const xBtn = document.createElement("button")
+            xBtn.classList.add("projRm")
+            projSelectTitle.appendChild(xBtn);
+            xBtn.addEventListener("click",()=>{
+                projSelectTitle.remove();
+                newOpt.remove();
+                projList.splice(projList.indexOf(xBtn.id),1)
+            })
+            projForm.style.visibility = "hidden"
+            addProj.style.visibility = "visible"
+            projInput.value = "";
+        }
+    })
+   
+
+
+
 })();
 
 const newTask = (() => {
@@ -140,7 +190,6 @@ export function addTaskCard(){
         taskTop.appendChild(newDiv(taskArray[i].title,"taskTitle"))
         taskTop.appendChild(newDiv(taskArray[i].date,"taskDate"))
         card.appendChild(newDiv("","taskBottom",`taskBottom-${i}`))
-
 
     
         const taskBottom = document.getElementById(`taskBottom-${i}`);
