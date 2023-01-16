@@ -10,6 +10,8 @@ import Add from './icons/add.png'
 import Plus from './icons/plus.png'
 import {newDiv,newBtn} from './functions.js'
 
+export let taskArray = [];
+
 
 
 
@@ -46,6 +48,7 @@ import {newDiv,newBtn} from './functions.js'
 
 (function projDates(){
     const sidebar = document.getElementById("sidebar");
+   
     
     sidebar.appendChild(newDiv("","dateNav"))
     const dateNav = document.querySelector(".dateNav");
@@ -60,6 +63,37 @@ import {newDiv,newBtn} from './functions.js'
         const nav = document.getElementById(dateArray[i].toLowerCase());
         nav.appendChild(myIcon)
     }
+    const allBtn = document.getElementById("all")
+    const todayBtn = document.getElementById("today")
+    const upcomingBtn = document.getElementById("upcoming")
+    const importantBtn = document.getElementById("important")
+    const completedBtn = document.getElementById("completed")
+
+    allBtn.addEventListener("click",()=>{
+        addTaskCard(taskArray);
+    })
+
+    todayBtn.addEventListener("click",()=>{
+        let today = new Date().toISOString().slice(0, 10)
+        
+        addTaskCard(Array.from(taskArray).filter(x=>x.date == today ))
+    })
+    
+    upcomingBtn.addEventListener("click",()=>{
+        const today = new Date().toISOString().slice(0,10)
+        const date = new Date();
+        const nextWeek = date.getDate() + 7;
+        date.setDate(nextWeek)
+        addTaskCard(Array.from(taskArray).filter(x => x.date <= date.toISOString().slice(0,10) && x.date >= today))
+    })
+
+    importantBtn.addEventListener("click",()=>{
+        addTaskCard(Array.from(taskArray).filter(x=>x.priority == "high" && x.comp !== "completed"));
+    })
+
+    completedBtn.addEventListener("click",()=>{
+        addTaskCard(Array.from(taskArray).filter(x=>x.comp == "completed"));
+    })
 })();
 
 
@@ -153,7 +187,8 @@ function taskFactory(title,date,priority,proj,desc,comp){
 
 
 
-let taskArray = [];
+
+
 
 export function createTask(){
     const title = document.getElementById("title");
@@ -166,34 +201,34 @@ export function createTask(){
     taskArray.push(task);
 }
 
-export function addTaskCard(){
+export function addTaskCard(array){
+
 
     
-  
     const taskCards = document.getElementById("taskCards");
 
     taskCards.innerHTML = "";
-    for(let i=0;i<taskArray.length;i++){
+    for(let i=0;i<array.length;i++){
         taskCards.appendChild(newDiv("","taskCard",i));
         let card = document.getElementById(i);
-        let taskColor = (taskArray[i].comp == "completed") ? card.style.backgroundColor = '#78716c':
-                        (taskArray[i].priority == "low") ? card.style.backgroundColor = '#22c55e' : 
-                        (taskArray[i].priority == "medium") ? card.style.backgroundColor = '#f59e0b' : 
-                        (taskArray[i].priority == "high") ? card.style.backgroundColor = '#ef4444':
-                        (taskArray[i].priority == "No priority") ? card.style.backgroundColor = '#e5e7eb':
+        let taskColor = (array[i].comp == "completed") ? card.style.backgroundColor = '#78716c':
+                        (array[i].priority == "low") ? card.style.backgroundColor = '#22c55e' : 
+                        (array[i].priority == "medium") ? card.style.backgroundColor = '#f59e0b' : 
+                        (array[i].priority == "high") ? card.style.backgroundColor = '#ef4444':
+                        (array[i].priority == "No priority") ? card.style.backgroundColor = '#e5e7eb':
                         card.style.backgroundColor = '#78716c';
                         
 
         card.appendChild(newDiv("","taskTop",`taskTop-${i}`))
         const taskTop = document.getElementById(`taskTop-${i}`)
-        taskTop.appendChild(newDiv(`Project: ${taskArray[i].proj}`,"taskProject"))
-        taskTop.appendChild(newDiv(taskArray[i].title,"taskTitle"))
-        taskTop.appendChild(newDiv(taskArray[i].date,"taskDate"))
+        taskTop.appendChild(newDiv(`Project: ${array[i].proj}`,"taskProject"))
+        taskTop.appendChild(newDiv(array[i].title,"taskTitle"))
+        taskTop.appendChild(newDiv(array[i].date,"taskDate"))
         card.appendChild(newDiv("","taskBottom",`taskBottom-${i}`))
 
     
         const taskBottom = document.getElementById(`taskBottom-${i}`);
-        taskBottom.appendChild(newDiv(`-${taskArray[i].desc}`,"description"))
+        taskBottom.appendChild(newDiv(`-${array[i].desc}`,"description"))
         taskBottom.appendChild(newDiv("","taskCheckRemove",`taskCheckRemove-${i}`));
         const taskBtns = document.getElementById(`taskCheckRemove-${i}`)
         const checkBtn = document.createElement("button")
@@ -201,21 +236,21 @@ export function addTaskCard(){
         checkBtn.textContent = ""
         checkBtn.classList = "check"
         checkBtn.addEventListener("click",()=>{
-            if(taskArray[i].comp == "completed"){
-                taskArray[i].comp = ""
+            if(array[i].comp == "completed"){
+                array[i].comp = ""
             }else{
-                taskArray[i].comp = "completed"
+                array[i].comp = "completed"
             }
             
-            addTaskCard();
+            addTaskCard(taskArray);
         })
         taskBtns.appendChild(checkBtn)
         
         rmBtn.textContent = ""
         rmBtn.classList = "remove"
         rmBtn.addEventListener("click",()=>{
-            taskArray.splice(i,1);
-            addTaskCard();
+            array.splice(i,1);
+            addTaskCard(taskArray);
         })
         taskBtns.appendChild(rmBtn)
     }

@@ -1,19 +1,14 @@
 const cancelBtn = document.getElementById("cancelBtn");
-const title = document.getElementById("title");
-const date = document.getElementById("date");
-const priority = document.getElementById("priority");
-const proj = document.getElementById("project");
-const desc = document.getElementById("description");
 const taskForm = document.getElementById("taskForm")
 const taskFormInfo = document.getElementById("taskFormInfo")
 const taskAdd = document.querySelector(".taskAdd");
 const submitBtn = document.getElementById("submitBtn");
-const taskCards = document.getElementById("taskCards")
+
 
 
 import { indexOf } from 'lodash';
 import {clearForm} from './functions.js'
-import {addTaskCard,createTask} from './initialDom.js'
+import {addTaskCard,createTask,taskArray} from './initialDom.js'
 
 
 const addTaskBtn = (() =>{
@@ -33,7 +28,7 @@ const submit = (()=>{
         }else{
             event.preventDefault();
             createTask();
-            addTaskCard();
+            addTaskCard(taskArray);
             clearForm();
             taskAdd.style.visibility = "visible";  
 
@@ -49,6 +44,7 @@ const cancel = (()=>{
         taskAdd.style.visibility = "visible"
     })
 })();
+
 
 
 
