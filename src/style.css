@@ -81,6 +81,7 @@ body{
     width: 100vw;
     height: auto;
     min-height: 100vh;
+    background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
    
@@ -327,7 +328,9 @@ body{
 #taskForm{
     font-family: sans-serif;
     background-color:  #fb923c;
-    width: 500px;
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
     height: 125px;  
     top: 80px;
     display: flex;
