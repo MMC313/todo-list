@@ -37,3 +37,10 @@ export function clearForm(){
     desc.value = "";
     taskForm.style.visibility = "hidden";
 }
+
+
+export function sortTasks(array){
+    array.sort((a,b)=>{
+        return Number(a.date.replaceAll("-","")) - Number(b.date.replaceAll("-",""))
+    })
+}

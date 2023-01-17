@@ -8,7 +8,7 @@ import Completed from './icons/completed.png'
 import Projects from './icons/projects.png'
 import Add from './icons/add.png'
 import Plus from './icons/plus.png'
-import {newDiv,newBtn} from './functions.js'
+import {newDiv,newBtn,sortTasks} from './functions.js'
 
 export let taskArray = [];
 
@@ -202,8 +202,7 @@ export function createTask(){
 }
 
 export function addTaskCard(array){
-
-
+    sortTasks(array);
     
     const taskCards = document.getElementById("taskCards");
 
@@ -242,7 +241,7 @@ export function addTaskCard(array){
                 array[i].comp = "completed"
             }
             
-            addTaskCard(taskArray);
+            addTaskCard(array);
         })
         taskBtns.appendChild(checkBtn)
         
@@ -250,7 +249,7 @@ export function addTaskCard(array){
         rmBtn.classList = "remove"
         rmBtn.addEventListener("click",()=>{
             array.splice(i,1);
-            addTaskCard(taskArray);
+            addTaskCard(array);
         })
         taskBtns.appendChild(rmBtn)
     }
