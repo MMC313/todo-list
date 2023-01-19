@@ -8,7 +8,7 @@ const submitBtn = document.getElementById("submitBtn");
 
 import { indexOf } from 'lodash';
 import {clearForm} from './functions.js'
-import {addTaskCard,createTask,taskArray} from './initialDom.js'
+import {storeValue,clearValues,addTaskCard,createTask,taskArray} from './initialDom.js'
 
 
 const addTaskBtn = (() =>{
@@ -30,6 +30,8 @@ const submit = (()=>{
             createTask();
             addTaskCard(taskArray);
             clearForm();
+            clearValues();
+            storeValue();
             taskAdd.style.visibility = "visible";  
 
         }

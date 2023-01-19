@@ -44,3 +44,4 @@ export function sortTasks(array){
         return Number(a.date.replaceAll("-","")) - Number(b.date.replaceAll("-",""))
     })
 }
+

@@ -10,8 +10,11 @@ import Add from './icons/add.png'
 import Plus from './icons/plus.png'
 import {newDiv,newBtn,sortTasks} from './functions.js'
 
-export let taskArray = [];
 
+
+
+
+export let taskArray = [];
 
 
 
@@ -133,7 +136,7 @@ export let taskArray = [];
         
         console.log(projList)
         if(projList.includes(projInput.value)){
-            alert("fuck you")
+            alert("Project already exists")
         }else{
             const newOpt = document.createElement("option")
             newOpt.textContent = projInput.value
@@ -199,9 +202,12 @@ export function createTask(){
     const comp = "";
     const task = taskFactory(title,date,priority,proj,desc,comp);
     taskArray.push(task);
+    
 }
 
 export function addTaskCard(array){
+   
+
     sortTasks(array);
     
     const taskCards = document.getElementById("taskCards");
@@ -240,7 +246,8 @@ export function addTaskCard(array){
             }else{
                 array[i].comp = "completed"
             }
-            
+            clearValues();
+            storeValue();
             addTaskCard(array);
         })
         taskBtns.appendChild(checkBtn)
@@ -249,8 +256,30 @@ export function addTaskCard(array){
         rmBtn.classList = "remove"
         rmBtn.addEventListener("click",()=>{
             array.splice(i,1);
+            clearValues();
+            storeValue();
             addTaskCard(array);
         })
         taskBtns.appendChild(rmBtn)
     }
 }
+
+
+export function storeValue(){
+    localStorage.setItem("taskCard", JSON.stringify(taskArray));
+}
+
+export function getValue(){
+   taskArray = JSON.parse(localStorage.getItem("taskCard"));
+   return taskArray;
+}
+
+ export function clearValues(){
+    localStorage.clear()
+}
+
+getValue();
+addTaskCard(taskArray);
+
+
+
