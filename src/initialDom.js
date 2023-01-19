@@ -8,7 +8,7 @@ import Completed from './icons/completed.png'
 import Projects from './icons/projects.png'
 import Add from './icons/add.png'
 import Plus from './icons/plus.png'
-import {newDiv,newBtn,sortTasks} from './functions.js'
+import {newDiv,newBtn} from './functions.js'
 
 
 
@@ -16,7 +16,11 @@ import {newDiv,newBtn,sortTasks} from './functions.js'
 
 export let taskArray = [];
 
-
+function sortTasks(array){
+    array.sort((a,b)=>{
+        return Number(a.date.replaceAll("-","")) - Number(b.date.replaceAll("-",""))
+    })
+}
 
 
 (function header(){

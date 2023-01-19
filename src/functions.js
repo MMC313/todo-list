@@ -39,9 +39,5 @@ export function clearForm(){
 }
 
 
-export function sortTasks(array){
-    array.sort((a,b)=>{
-        return Number(a.date.replaceAll("-","")) - Number(b.date.replaceAll("-",""))
-    })
-}
+
 
