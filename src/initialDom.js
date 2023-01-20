@@ -8,13 +8,16 @@ import Completed from './icons/completed.png'
 import Projects from './icons/projects.png'
 import Add from './icons/add.png'
 import Plus from './icons/plus.png'
-import {newDiv,newBtn} from './functions.js'
+import {newDiv,newBtn,getValue,storeValue,clearValues} from './functions.js'
 
 
 
 
 
 export let taskArray = [];
+
+
+
 
 function sortTasks(array){
     array.sort((a,b)=>{
@@ -82,7 +85,6 @@ function sortTasks(array){
 
     todayBtn.addEventListener("click",()=>{
         let today = new Date().toISOString().slice(0, 10)
-        
         addTaskCard(Array.from(taskArray).filter(x=>x.date == today ))
     })
     
@@ -193,10 +195,6 @@ function taskFactory(title,date,priority,proj,desc,comp){
 
 
 
-
-
-
-
 export function createTask(){
     const title = document.getElementById("title");
     const date = document.getElementById("date");
@@ -206,7 +204,6 @@ export function createTask(){
     const comp = "";
     const task = taskFactory(title,date,priority,proj,desc,comp);
     taskArray.push(task);
-    
 }
 
 export function addTaskCard(array){
@@ -269,21 +266,12 @@ export function addTaskCard(array){
 }
 
 
-export function storeValue(){
-    localStorage.setItem("taskCard", JSON.stringify(taskArray));
+if(getValue()!==null){
+    getValue();
+    addTaskCard(taskArray);
+}else{
+    taskArray = [];
 }
-
-export function getValue(){
-   taskArray = JSON.parse(localStorage.getItem("taskCard"));
-   return taskArray;
-}
-
- export function clearValues(){
-    localStorage.clear()
-}
-
-getValue();
-addTaskCard(taskArray);
 
 
 

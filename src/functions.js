@@ -1,3 +1,4 @@
+import { taskArray } from "./initialDom.js";
 
 export  function newDiv(content,classList,id){
             const newDiv = document.createElement("div");
@@ -39,5 +40,16 @@ export function clearForm(){
 }
 
 
+export function storeValue(){
+    localStorage.setItem("taskCard", JSON.stringify(taskArray));
+}
 
+export function getValue(){
+   taskArray = JSON.parse(localStorage.getItem("taskCard"));
+   return taskArray;
+}
+
+ export function clearValues(){
+    localStorage.clear()
+}
 

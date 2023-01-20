@@ -7,8 +7,8 @@ const submitBtn = document.getElementById("submitBtn");
 
 
 import { indexOf } from 'lodash';
-import {clearForm} from './functions.js'
-import {storeValue,clearValues,addTaskCard,createTask,taskArray} from './initialDom.js'
+import {clearForm,storeValue,clearValues,} from './functions.js'
+import {addTaskCard,createTask,taskArray} from './initialDom.js'
 
 
 const addTaskBtn = (() =>{
