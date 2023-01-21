@@ -137,13 +137,18 @@ function sortTasks(array){
     })
     projects.appendChild(newDiv("","projContainer"))
     let projList =[];
+
+  
     projFormAdd.addEventListener("click",function add(event){
         event.preventDefault();
         
         console.log(projList)
         if(projList.includes(projInput.value)){
-            alert("Project already exists")
+            projInput.setCustomValidity("You already have this project!")
+            projInput.reportValidity();
         }else{
+            projInput.setCustomValidity("")
+            projInput.reportValidity();
             const newOpt = document.createElement("option")
             newOpt.textContent = projInput.value
             newOpt.setAttribute("value",projInput.value)
@@ -165,7 +170,11 @@ function sortTasks(array){
             projInput.value = "";
         }
     })
-   
+    
+    projInput.addEventListener("keydown",()=>{
+        projInput.blur();
+        projInput.focus();
+    })
 
 
 
